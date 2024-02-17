@@ -8,16 +8,15 @@ function App() {
 
   const handleCalculation = (operation) => {
     const url = `https://4qw9xng9i5.execute-api.ap-southeast-1.amazonaws.com/Alpha/${operation}`;
-    const parsedNum1 = num1 === "" ? 0 : parseFloat(num1);
-    const parsedNum2 = num2 === "" ? 0 : parseFloat(num2);
 
-    if (isNaN(parsedNum1) || isNaN(parsedNum2)) {
+    if ((num1 !== "" && isNaN(num1)) || (num2 !== "" && isNaN(num2))) {
       setInvalidInput(true);
       setResult(null);
       return;
     } else {
       setInvalidInput(false);
     }
+
     fetch(url, {
       method: "POST",
       headers: {
@@ -51,7 +50,7 @@ function App() {
           <input
             value={num1}
             onChange={(e) => setNum1(e.target.value)}
-            type="number"
+            type="text"
             placeholder="Number 1"
             className="form-control"
           />
@@ -60,7 +59,7 @@ function App() {
           <input
             value={num2}
             onChange={(e) => setNum2(e.target.value)}
-            type="number"
+            type="text"
             placeholder="Number 2"
             className="form-control"
           />
